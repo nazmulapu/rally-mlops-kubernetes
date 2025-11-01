@@ -27,7 +27,7 @@ variable "kubernetes_version" {
 variable "system_pool_vm_size" {
   description = "VM size for system node pool"
   type        = string
-  default     = "Standard_D2s_v3"
+  default     = "Standard_D2ds_v5"
 }
 
 variable "system_pool_node_count" {
