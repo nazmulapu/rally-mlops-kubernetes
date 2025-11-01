@@ -38,7 +38,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   node_count            = !var.enable_autoscaling ? var.worker_pool_node_count : null
   os_disk_size_gb       = 128
   os_type               = "Linux"
-  type                  = "VirtualMachineScaleSets"
 
   # Autoscaling configuration
   enable_auto_scaling = var.enable_autoscaling

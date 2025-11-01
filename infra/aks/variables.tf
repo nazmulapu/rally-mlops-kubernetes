@@ -9,7 +9,7 @@ variable "resource_group_name" {
 variable "location" {
   description = "Azure region"
   type        = string
-  default     = "eastus"
+  default     = "westeurope"
 }
 
 variable "cluster_name" {
