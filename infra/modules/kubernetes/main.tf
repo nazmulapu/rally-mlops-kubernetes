@@ -10,12 +10,13 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   # System node pool
   default_node_pool {
-    name                = "system"
-    node_count          = var.system_pool_node_count
-    vm_size             = var.system_pool_vm_size
-    os_disk_size_gb     = 128
-    type                = "VirtualMachineScaleSets"
-    enable_auto_scaling = false # System pool doesn't scale
+    name                        = "system"
+    node_count                  = var.system_pool_node_count
+    vm_size                     = var.system_pool_vm_size
+    os_disk_size_gb             = 128
+    type                        = "VirtualMachineScaleSets"
+    enable_auto_scaling         = false # System pool doesn't scale
+    temporary_name_for_rotation = "temp"
   }
 
   # Identity
