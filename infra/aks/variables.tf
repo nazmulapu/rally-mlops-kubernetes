@@ -21,7 +21,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "1.28"
+  default     = "1.31"
 }
 
 variable "system_pool_vm_size" {
