@@ -20,7 +20,7 @@ locals {
       use_managed_identity  = false
       acr_admin_enabled     = true
       autoscaling_enabled   = false
-      worker_node_count     = 2
+      worker_node_count     = 0  # Disabled to fit quota
       min_worker_nodes      = 1
       max_worker_nodes      = 3
       system_pool_nodes     = 1
