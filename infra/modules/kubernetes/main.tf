@@ -38,7 +38,9 @@ resource "azurerm_kubernetes_cluster" "main" {
 }
 
 # Worker node pool with autoscaling and spot instance support
+# Only create if worker_pool_node_count > 0 or autoscaling is enabled
 resource "azurerm_kubernetes_cluster_node_pool" "workers" {
+  count                 = var.worker_pool_node_count > 0 || var.enable_autoscaling ? 1 : 0
   name                  = "workers"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.main.id
   vm_size               = var.worker_pool_vm_size
