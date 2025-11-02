@@ -10,13 +10,13 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   # System node pool
   default_node_pool {
-    name                        = "system"
-    node_count                  = var.system_pool_node_count
-    vm_size                     = var.system_pool_vm_size
-    os_disk_size_gb             = 128
-    type                        = "VirtualMachineScaleSets"
-    enable_auto_scaling         = false # System pool doesn't scale
-    temporary_name_for_rotation = "temp"
+    name                = "system"
+    node_count          = var.system_pool_node_count
+    vm_size             = var.system_pool_vm_size
+    os_disk_size_gb     = 128
+    type                = "VirtualMachineScaleSets"
+    enable_auto_scaling = false # System pool doesn't scale
+    zones               = ["1", "2", "3"] # Spread across availability zones
   }
 
   # Identity
@@ -49,6 +49,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   priority        = var.use_spot_instances ? "Spot" : "Regular"
   eviction_policy = var.use_spot_instances ? "Delete" : null
   spot_max_price  = var.use_spot_instances && var.spot_max_price != null ? var.spot_max_price : null
+
+  # Availability zones for better capacity availability
+  zones = ["1", "2", "3"]
 
   tags = var.tags
 
