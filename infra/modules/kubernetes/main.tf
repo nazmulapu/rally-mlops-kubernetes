@@ -59,11 +59,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   # Availability zones for better capacity availability
   zones = ["1", "2", "3"] # Multiple zones for Standard_D2as_v6 availability
 
-  upgrade_settings {
-    # Azure requires maxSurge or maxUnavailable to be non-zero.
-    # Setting max_surge to "1" avoids the API error while keeping surge small.
-    max_surge = "1"
-  }
+  # Note: Spot pools cannot use upgrade_settings with max_surge
+  # Upgrades will use default behavior for spot instances
 
   tags = var.tags
   
