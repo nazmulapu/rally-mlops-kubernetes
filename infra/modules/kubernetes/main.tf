@@ -17,6 +17,10 @@ resource "azurerm_kubernetes_cluster" "main" {
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = false # System pool doesn't scale
     zones               = ["3"] # Use zone 3 where Standard_D2s_v6 is available
+    
+    upgrade_settings {
+      max_surge = "0"
+    }
   }
 
   # Identity
@@ -53,7 +57,11 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   # Availability zones for better capacity availability
   zones = ["3"] # Use zone 3 for worker nodes
 
-  tags = var.tags
+  upgrade_settings {
+    max_surge = "0"
+  }
 
+  tags = var.tags
+  
   depends_on = [azurerm_kubernetes_cluster.main]
 }
