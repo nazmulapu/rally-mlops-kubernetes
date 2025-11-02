@@ -19,7 +19,9 @@ resource "azurerm_kubernetes_cluster" "main" {
     zones               = ["3"] # Use zone 3 where Standard_D2s_v6 is available
     
     upgrade_settings {
-      max_surge = "0"
+      # Azure requires maxSurge or maxUnavailable to be non-zero.
+      # Setting max_surge to "1" avoids the API error while keeping surge small.
+      max_surge = "1"
     }
   }
 
@@ -58,7 +60,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   zones = ["3"] # Use zone 3 for worker nodes
 
   upgrade_settings {
-    max_surge = "0"
+    # Azure requires maxSurge or maxUnavailable to be non-zero.
+    # Setting max_surge to "1" avoids the API error while keeping surge small.
+    max_surge = "1"
   }
 
   tags = var.tags
