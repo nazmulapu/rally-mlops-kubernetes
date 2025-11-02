@@ -45,12 +45,12 @@ variable "worker_pool_vm_size" {
 }
 
 variable "worker_pool_node_count" {
-  description = "Initial number of worker nodes (fixed if autoscaling disabled)"
+  description = "Initial number of worker nodes (fixed if autoscaling disabled). Set to 0 to disable worker pool."
   type        = number
   default     = 2
   validation {
-    condition     = var.worker_pool_node_count >= 1 && var.worker_pool_node_count <= 100
-    error_message = "Worker pool node count must be between 1 and 100."
+    condition     = var.worker_pool_node_count >= 0 && var.worker_pool_node_count <= 100
+    error_message = "Worker pool node count must be between 0 and 100. Set to 0 to disable worker pool."
   }
 }
 
