@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "main" {
     os_disk_size_gb     = 128
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = false # System pool doesn't scale
-    zones               = ["1", "2", "3"] # Spread across availability zones
+    zones               = ["3"] # Use zone 3 where Standard_D2s_v6 is available
   }
 
   # Identity
@@ -51,7 +51,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "workers" {
   spot_max_price  = var.use_spot_instances && var.spot_max_price != null ? var.spot_max_price : null
 
   # Availability zones for better capacity availability
-  zones = ["1", "2", "3"]
+  zones = ["3"] # Use zone 3 for worker nodes
 
   tags = var.tags
 
