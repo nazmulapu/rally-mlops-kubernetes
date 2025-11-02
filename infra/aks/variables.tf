@@ -39,7 +39,7 @@ variable "system_pool_node_count" {
 variable "worker_pool_vm_size" {
   description = "VM size for worker (spot) node pool"
   type        = string
-  default     = "Standard_D2s_v3"
+  default     = "Standard_D2as_v6"
 }
 
 variable "worker_pool_node_count" {
